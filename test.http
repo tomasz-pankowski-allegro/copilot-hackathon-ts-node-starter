@@ -1,0 +1,65 @@
+###
+POST http://localhost:3000/currency
+Content-Type: application/json
+
+{
+  "currencies": [
+    {
+      "currency": "EUR",
+      "price_pln": "4.31",
+      "date": "2023-01-01"
+    },
+    {
+      "currency": "EUR",
+      "price_pln": "3.98",
+      "date": "2023-01-01"
+    }
+  ]
+}
+
+> {%
+    client.test('should add currency value for given dates',
+        () => {
+            console.log(response.status);
+            client.assert(response.status === 204);
+        });
+%}
+
+###
+POST http://localhost:3000/currencyExchange
+Content-Type: application/json
+
+{
+  "from_currency": "EUR",
+  "to_currency": "PLN",
+  "amount": 123.33,
+  "date": "2023-01-01"
+}
+
+> {%
+    client.test('should make currency exchange for given amount',
+        () => {
+            client.assert(JSON.stringify(response.body) ===  JSON.stringify({
+                "currency": "PLN",
+                "value": 490.85339999999997,
+                "date": "2023-01-01"
+            }));
+        });
+%}
+
+###
+GET http://localhost:3000/currency
+
+> {%
+    client.test('should return currency exchange rates',
+       () => {
+            client.assert( JSON.stringify(response.body) ===  JSON.stringify({
+                "EUR": {
+                    "PLN": {
+                        "2023-01-01": 3.98
+                    }
+                }
+            }));
+        });
+%}
+
