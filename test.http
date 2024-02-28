@@ -1,4 +1,14 @@
 ###
+GET http://localhost:3000/health-check
+
+> {%
+    client.test('should make currency exchange for given amount',
+        () => {
+            client.assert(response.body === "health check OK");
+        });
+%}
+
+###
 POST http://localhost:3000/currency
 Content-Type: application/json
 
