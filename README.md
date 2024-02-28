@@ -42,6 +42,12 @@ You can test the API using the provided `test.http` file in WebStorm. Each reque
 
 Alternatively, you can use `curl` commands in the terminal to test the API. Here are the commands for each endpoint:
 
+- `GET /health-check`:
+
+```bash
+curl -X GET http://localhost:3000/health-check
+```
+
 - `POST /currencyExchange`:
 
 ```bash
