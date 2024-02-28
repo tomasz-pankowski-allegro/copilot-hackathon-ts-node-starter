@@ -2,7 +2,7 @@
 GET http://localhost:3000/health-check
 
 > {%
-    client.test('should make currency exchange for given amount',
+    client.test('should return simple health check message',
         () => {
             client.assert(response.body === "health check OK");
         });
