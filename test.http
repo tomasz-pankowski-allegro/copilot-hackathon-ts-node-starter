@@ -86,6 +86,50 @@ Content-Type: application/json
 
 {
   "from_currency": "USD",
+  "to_currency": "USD",
+  "amount": 1,
+  "date": "2023-01-01"
+}
+
+> {%
+    client.test('should make currency exchange for given amount EUR',
+        () => {
+            client.assert(JSON.stringify(response.body) ===  JSON.stringify({
+                "currency": "USD",
+                "value":  1.0829145728643215,
+                "date": "2023-01-01"
+            }));
+        });
+%}
+
+###
+POST http://localhost:3000/currencyExchange
+Content-Type: application/json
+
+{
+  "from_currency": "USD",
+  "to_currency": "USD",
+  "amount": 1,
+  "date": "2023-01-01"
+}
+
+> {%
+    client.test('should make currency exchange for given amount EUR',
+        () => {
+            client.assert(JSON.stringify(response.body) ===  JSON.stringify({
+                "currency": "USD",
+                "value":  1,
+                "date": "2023-01-01"
+            }));
+        });
+%}
+
+###
+POST http://localhost:3000/currencyExchange
+Content-Type: application/json
+
+{
+  "from_currency": "USD",
   "to_currency": "PLN",
   "amount": 123.33,
   "date": "2023-01-01"
