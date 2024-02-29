@@ -43,17 +43,18 @@ GET http://localhost:3000/currency
         () => {
             console.log(response.body);
             client.assert( JSON.stringify(response.body) ===  JSON.stringify({
-                "EUR": {
-                    "PLN": {
-                        "2023-01-01": 4.31
+                "currencies": [
+                    {
+                        "currency": "EUR",
+                        "price_pln": "4.31",
+                        "date": "2023-01-01"
+                    },
+                    {
+                        "currency": "USD",
+                        "price_pln": "3.98",
+                        "date": "2023-01-01"
                     }
-                },
-                "USD": {
-                    "PLN": {
-                        "2023-01-01": 3.98
-                    }
-                }
-            }));
+                ]}));
         });
 %}
 
@@ -135,19 +136,20 @@ GET http://localhost:3000/currency
     client.test('should return more currency rates',
         () => {
             client.assert( JSON.stringify(response.body) ===  JSON.stringify({
-                "EUR": {
-                    "PLN": {
-                        "2023-01-01": 4.31,
-                        "2023-01-02": 4.50
+                "currencies": [
+                    {
+                        "currency": "EUR",
+                        "price_pln": "4.50",
+                        "date": "2023-01-01"
+                    },
+                    {
+                        "currency": "USD",
+                        "price_pln": "4.00",
+                        "date": "2023-01-01"
                     }
-                },
-                "USD": {
-                    "PLN": {
-                        "2023-01-01": 3.98,
-                        "2023-01-02": 4.00
-                    }
-                }
-            }));
+                ]}
+            ));
         });
 %}
+
 
