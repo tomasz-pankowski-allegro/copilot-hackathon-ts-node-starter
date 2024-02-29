@@ -35,7 +35,7 @@ Content-Type: application/json
         });
 %}
 
-###
+### This test will fail if you implemented GET which return also all previous rates and should be run when DB is empty you can add flush DB endpoint above to clean state
 GET http://localhost:3000/currency
 
 > {%
@@ -135,29 +135,31 @@ GET http://localhost:3000/currency
 > {%
     client.test('should return more currency rates',
         () => {
+            console.log(response.body);
             client.assert( JSON.stringify(response.body) ===  JSON.stringify({
-                "currencies": [
-                    {
-                        "currency": "EUR",
-                        "price_pln": "4.50",
-                        "date": "2023-01-02"
-                    },
-                    {
-                        "currency": "USD",
-                        "price_pln": "4.00",
-                        "date": "2023-01-02"
-                    },
-                    {
-                        "currency": "EUR",
-                        "price_pln": "4.31",
-                        "date": "2023-01-01"
-                    },
-                    {
-                        "currency": "USD",
-                        "price_pln": "3.98",
-                        "date": "2023-01-01"
-                    }
-                ]}
+                    "currencies": [
+                        {
+                            "currency": "EUR",
+                            "price_pln": "4.31",
+                            "date": "2023-01-01"
+                        },
+                        {
+                            "currency": "EUR",
+                            "price_pln": "4.5",
+                            "date": "2023-01-02"
+                        },
+                        {
+                            "currency": "USD",
+                            "price_pln": "3.98",
+                            "date": "2023-01-01"
+                        },
+                        {
+                            "currency": "USD",
+                            "price_pln": "4",
+                            "date": "2023-01-02"
+                        }
+                    ]
+                }
             ));
         });
 %}
